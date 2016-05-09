@@ -19,21 +19,26 @@ USE_DATABASE = False
 # could be one or more artists
 def generateLyrics(artists):
 	allLyrics = []
-	for artist in artists:
-		allLyrics += [item[1] for item in getAllLyrics(artist)]
-	# end for
 
-	#print allLyrics
+	if USE_DATABASE == True:
+		# TODO
+		return None
+	else:
+		for artist in artists:
+			allLyrics += [item[1] for item in getAllLyrics(artist)]
+		# end for
 
-	mc = MarkovChain(2)
-	for song in allLyrics:
-		mc.add_string(song)
-	# end
-	
-	newLyrics = mc.generate_text(80)
+		#print allLyrics
 
-	print newLyrics
-	return newLyrics
+		mc = MarkovChain(2)
+		for song in allLyrics:
+			mc.add_string(song)
+		# end
+		
+		newLyrics = mc.generate_text(80)
+
+		print newLyrics
+		return newLyrics
 
 
 # get a list of tuples (song, lyrics) 
